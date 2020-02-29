@@ -29,14 +29,14 @@ const lff = [
 const LondonFilmFest = () => {
   const [city, setCity] = useState(null)
 
-  const delayLoop = delay => {
-    return (name, i) => {
-      setTimeout(() => {
-        setCity(name)
-        // window.innerWidth < 1024 ? setCity(name) : null
-      }, i * delay)
-    }
-  }
+  // const delayLoop = delay => {
+  //   return (name, i) => {
+  //     setTimeout(() => {
+  //       setCity(name)
+  //       // window.innerWidth < 1024 ? setCity(name) : null
+  //     }, i * delay)
+  //   }
+  // }
   // lff.map(delayLoop(1000))
   useEffect(() => {})
   // console.log(cityRotator)
