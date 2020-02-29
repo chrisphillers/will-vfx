@@ -1,44 +1,56 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import logo from "../../static/LFW_logo.png"
 
 const Backdrop = styled.div`
-  transition: background-image 0.1s ease;
+  transition: background 0.1s ease;
   background-color: black;
   background-image: url(${({ cityImage }) => cityImage});
   box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.5);
-
   background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  /* height: 100%; */
+  overflow: hidden;
+  /* background-size: cover; */
+  margin: 0;
   /* background-blend-mode: saturation; */
   /* filter: grayscale(100%); */
   width: 100vw;
   height: 100vh;
   display: grid;
-  /* align-items: start; */
-  margin: 0;
-  justify-content: center;
   align-content: center;
 `
+// const desktopFont = 8
 
 const CityTitles = styled.li`
   transition: all 0.1s ease;
   text-align: center;
-  color: white;
+  color: ${({ isSelected }) => (isSelected ? "red" : "white")};
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 10rem;
   font-family: "Inconsolata";
   font-weight: bold;
-
+  font-size: 16vw;
   cursor: pointer;
-  :hover {
-    color: red;
-    font-size: 12rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 10vw;
+  }
+
+  @media screen and (min-width: 1025px) {
+    font-size: 8vw;
+
+    :hover {
+      color: red;
+      font-size: 9vw;
+    }
   }
 `
 
 const TitlesWrapper = styled.ul`
   list-style: none;
+  padding: 0;
 
   /* display: flex;
   align-self: center; */
@@ -48,8 +60,17 @@ const Logo = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  margin: 2em;
-  width: 160px;
+  margin: 2vw;
+  width: 20vw;
+
+  @media screen and (min-width: 768px) {
+    font-size: 6vw;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 10vw;
+  }
+
   /* color: white; */
   /* background: #84d0ff;
 
@@ -76,23 +97,37 @@ const lff = [
   {
     name: "Aleppo",
     url:
-      "https://i1.wp.com/www.middleeastmonitor.com/wp-content/uploads/images/article_images/middle-east/a-destroyed-street-in-aleppo-syria.jpg?fit=933%2C622&quality=85&strip=all&ssl=1",
+      "https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/10/06/15/aleppo-1-5-10-2016.jpg?w968h681",
   },
 ]
 
 const LondonFilmFest = () => {
-  const [cityPicture, setcityPicture] = useState(null)
-  // const [hoverRef, isHovered] = useHover()
+  const [city, setCity] = useState(null)
+
+  // const cityRotator = () => {}
+  // cityRotator()
+  const delayLoop = delay => {
+    return (name, i) => {
+      setTimeout(() => {
+        window.innerWidth < 1024 ? setCity(name) : null
+      }, i * delay)
+    }
+  }
+  lff.map(delayLoop(1000))
+  useEffect(() => {})
+  // console.log(cityRotator)
   return (
-    <Backdrop cityImage={cityPicture}>
+    <Backdrop cityImage={city?.url}>
       <Logo src={logo}></Logo>
       <TitlesWrapper>
         {lff.map(fest => {
+          const isSelected = city?.name === fest.name
           return (
             <CityTitles
+              isSelected={isSelected}
               key={fest.url}
-              onMouseOver={() => setcityPicture(fest.url)}
-              onMouseOut={() => setcityPicture(null)}
+              onMouseOver={() => setCity(fest)}
+              onMouseOut={() => setCity(null)}
             >
               {fest.name}
             </CityTitles>
