@@ -32,7 +32,8 @@ const LondonFilmFest = () => {
   const delayLoop = delay => {
     return (name, i) => {
       setTimeout(() => {
-        window.innerWidth < 1024 ? setCity(name) : null
+        setCity(name)
+        // window.innerWidth < 1024 ? setCity(name) : null
       }, i * delay)
     }
   }
