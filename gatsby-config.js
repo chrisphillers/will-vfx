@@ -17,6 +17,10 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
+    { resolve: `gatsby-plugin-styled-components`,
+    options: {
+    
+    },
     {
       resolve: `gatsby-source-wordpress`,
       options: {
