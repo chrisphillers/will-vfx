@@ -37,7 +37,7 @@ const LondonFilmFest = () => {
       }, i * delay)
     }
   }
-  lff.map(delayLoop(1000))
+  // lff.map(delayLoop(1000))
   useEffect(() => {})
   // console.log(cityRotator)
   return (
