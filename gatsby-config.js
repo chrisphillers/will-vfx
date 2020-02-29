@@ -25,5 +25,19 @@ module.exports = {
         hostingWPCOM: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Inconsolata`,
+          },
+          {
+            family: `Roboto`,
+            subsets: [`latin`],
+          },
+        ],
+      },
+    },
   ],
 }
