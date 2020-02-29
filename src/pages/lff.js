@@ -1,82 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import logo from "../../static/LFW_logo.png"
-
-const Backdrop = styled.div`
-  transition: background 0.1s ease;
-  background-color: black;
-  background-image: url(${({ cityImage }) => cityImage});
-  box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.5);
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  /* height: 100%; */
-  overflow: hidden;
-  /* background-size: cover; */
-  margin: 0;
-  /* background-blend-mode: saturation; */
-  /* filter: grayscale(100%); */
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  align-content: center;
-`
-// const desktopFont = 8
-
-const CityTitles = styled.li`
-  transition: all 0.1s ease;
-  text-align: center;
-  color: ${({ isSelected }) => (isSelected ? "red" : "white")};
-  text-transform: uppercase;
-  text-decoration: none;
-  font-family: "Inconsolata";
-  font-weight: bold;
-  font-size: 16vw;
-  cursor: pointer;
-
-  @media screen and (min-width: 768px) {
-    font-size: 10vw;
-  }
-
-  @media screen and (min-width: 1025px) {
-    font-size: 8vw;
-
-    :hover {
-      color: red;
-      font-size: 9vw;
-    }
-  }
-`
-
-const TitlesWrapper = styled.ul`
-  list-style: none;
-  padding: 0;
-
-  /* display: flex;
-  align-self: center; */
-`
-
-const Logo = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 2vw;
-  width: 20vw;
-
-  @media screen and (min-width: 768px) {
-    font-size: 6vw;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 10vw;
-  }
-
-  /* color: white; */
-  /* background: #84d0ff;
-
-  background-blend-mode: screen; */
-  filter: brightness(1) invert(0.7) sepia(0) hue-rotate(100deg) saturate(200%);
-`
+import * as S from "../styles/lff.styles.js"
 
 const lff = [
   {
@@ -104,8 +29,6 @@ const lff = [
 const LondonFilmFest = () => {
   const [city, setCity] = useState(null)
 
-  // const cityRotator = () => {}
-  // cityRotator()
   const delayLoop = delay => {
     return (name, i) => {
       setTimeout(() => {
@@ -117,24 +40,24 @@ const LondonFilmFest = () => {
   useEffect(() => {})
   // console.log(cityRotator)
   return (
-    <Backdrop cityImage={city?.url}>
-      <Logo src={logo}></Logo>
-      <TitlesWrapper>
+    <S.Backdrop cityImage={city?.url}>
+      <S.Logo src={logo}></S.Logo>
+      <S.TitlesWrapper>
         {lff.map(fest => {
           const isSelected = city?.name === fest.name
           return (
-            <CityTitles
+            <S.CityTitles
               isSelected={isSelected}
               key={fest.url}
               onMouseOver={() => setCity(fest)}
               onMouseOut={() => setCity(null)}
             >
               {fest.name}
-            </CityTitles>
+            </S.CityTitles>
           )
         })}
-      </TitlesWrapper>
-    </Backdrop>
+      </S.TitlesWrapper>
+    </S.Backdrop>
   )
 }
 
